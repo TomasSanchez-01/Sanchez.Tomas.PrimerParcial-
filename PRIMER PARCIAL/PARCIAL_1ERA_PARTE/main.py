@@ -50,8 +50,8 @@ def submenu(matriz_acciones, vector_usuarios, vector_empresas, vector_precios):
     bandera = True
     while bandera == True:
         print("\n----------------CONSULTAS----------------\n")
-        print("1. Cantidad de acciones de cada usuario.\n2. Promedio de acciones adquiridas por cada empresa.\n3. Total invertido de cada usuario ordenado alfabeticamente z-a.\n4. Inversiones totales en la app.\n5. Por cada usuario, la empresa en la que compró más acciones.\n6. Acción con mayor inversión total (USD) en toda la cartera.\n7. Porcentaje de inversión por usuario respecto a la inversión total acumulada.\n8. Listado de los usuarios cuyo promedio del total de sus inversiones supere el promedio del total de inversiones de toda la cartera.\n9. Determinar cuál es la empresa que menos dinero recaudó.\n10. Todos los usuarios cuya cantidad de acciones de Tesla supere el número promedio de acciones de Tesla.\n11. Volver al menú principal.\n")
-        opcion = get_int("Ingrese una opción: ", "Error, Reingrese una opción (1-11): ",1,11 )
+        print("1. Cantidad de acciones de cada usuario.\n2. Promedio de acciones adquiridas por cada empresa.\n3. Total invertido de cada usuario ordenado alfabeticamente z-a.\n4. Inversiones totales en la app.\n5. Por cada usuario, la empresa en la que compró más acciones.\n6. Acción con mayor inversión total (USD) en toda la cartera.\n7. Porcentaje de inversión por usuario respecto a la inversión total acumulada.\n8. Listado de los usuarios cuyo promedio del total de sus inversiones supere el promedio del total de inversiones de toda la cartera.\n9. Determinar cuál es la empresa que menos dinero recaudó.\n10. Todos los usuarios cuya cantidad de acciones de Tesla supere el número promedio de acciones de Tesla.\n11. Muestra para cada empresa cuál es el usuario que realizó la mayor inversión.\n12. Volver al menú principal.\n")
+        opcion = get_int("Ingrese una opción: ", "Error, Reingrese una opción (1-12): ",1,12 )
         match opcion:
             case 1:
                 print("\n---------- CANTIDAD TOTAL DE ACCIONES ADQUIRIDAS POR USUARIO ----------\n")
@@ -97,6 +97,9 @@ def submenu(matriz_acciones, vector_usuarios, vector_empresas, vector_precios):
                 usuarios_superiores_al_promedio_de_x_empresa (matriz_acciones,vector_usuarios, vector_empresas, "TESLA")
 
             case 11:
+                print("\n---------- USUARIOS QUE REALIZARON MAYOR INVERSION EN CADA EMPRESA----------\n")
+                usuario_con_mayor_inversion_en_las_empresas(matriz_acciones,vector_usuarios,vector_empresas)
+            case 12:
                 print("\nVolviendo al menú principal...\n")
                 bandera = False
                 break

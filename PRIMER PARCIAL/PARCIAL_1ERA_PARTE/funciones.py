@@ -344,6 +344,7 @@ def porcentaje_de_inversion_por_usuario(matriz: list, vector_precios: list, vect
         vector_precios (list): lista de precios de las acciones
         vector_usuarios (list): lista de usuarios registrados
     """
+    vector_usuarios = ordenar_filas_alfabeticamente_usuarios(vector_usuarios)
     inversion_total = suma_total_invertido_matriz(matriz, vector_precios)
     
     for i in range(len(matriz)):
@@ -364,7 +365,7 @@ def compra_mayor_de_acciones_por_usuario (matriz: list, vector_usuarios: list, v
         vector_empresas (list): lista con las empresas disponibles
     """
     
-    
+    vector_usuarios = ordenar_filas_alfabeticamente_usuarios(vector_usuarios)
     for i in range(len(matriz)):
         maximo = 0
         indice_maximo = -1
@@ -391,7 +392,7 @@ def visualizar_todos_los_datos(matriz_acciones: list, vector_usuarios: list,vect
     for i in range(len(matriz_acciones)):
         for j in range(len(matriz_acciones[i])):
             if matriz_acciones[i][j] != 0:
-                print(f"\n● Usuario: {vector_usuarios[i]}\n● Acción: {vector_empresas[j]}\n● Precio por unidad: {vector_precios[j]}\n● Cantidad adquirida: {matriz_acciones[i][j]}\n● Total invertido: {(matriz_acciones[i][j]) * vector_precios[j]}\n ")
+                print(f"\n● Usuario: {vector_usuarios[i]}\n● Acción: {vector_empresas[j]}\n● Precio por unidad: {vector_precios[j]}\n● Cantidad adquirida: {matriz_acciones[i][j]}\n● Total invertido: US$ {(matriz_acciones[i][j]) * vector_precios[j]}\n ")
 
 
 def total_por_usuarios(matriz: list, vector_precios: list) -> list:
@@ -469,7 +470,8 @@ def usuarios_superiores_al_promedio_de_x_empresa (matriz: list,vector_usuarios: 
     for i in range (len(vector_empresas)):
         if vector_empresas[i] == empresa:
             empresa = i
-            
+
+    vector_usuarios = ordenar_filas_alfabeticamente_usuarios(vector_usuarios)
     vector_usuarios_superiores_al_promedio = []
     vector_nombre_usuarios_superiores_al_promedio = []
     for i in range(len(matriz)):
@@ -487,3 +489,19 @@ def usuarios_superiores_al_promedio_de_x_empresa (matriz: list,vector_usuarios: 
     print("Usuarios con promedio de acciones superior al general:")
     for i in range(len(vector_usuarios_superiores_al_promedio)):
         print(f"{vector_nombre_usuarios_superiores_al_promedio[i]:<16} {vector_usuarios_superiores_al_promedio[i]:<2} acciones")
+
+def usuario_con_mayor_inversion_en_las_empresas(matriz,vector_usuarios, vector_empresas):
+
+    for j in range(len(matriz[0])):
+        maximo = 0
+        indice_maximo = 0
+        for i in range(len(matriz)):
+            if matriz [i][j] > maximo or i == 0:
+                maximo = matriz [i][j] 
+                indice_maximo = i
+
+        if matriz[indice_maximo][j] != 0:
+            print(f"Usuario con mayor inversión de {vector_empresas[j]}: {vector_usuarios[indice_maximo]}")
+        else:
+            print(f"Usuario con mayor inversión de {vector_empresas[j]}: Ningún usuario ha invertido aún")
+
