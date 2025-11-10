@@ -6,14 +6,43 @@ def validate_number(numero: int, minimo:int, maximo:int) -> bool:
 
     return numero_validado
 
-def get_int( mensaje: str, mensaje_error: str , minimo: int , maximo: int) -> int|None:
-    
-    numero = int(input(mensaje))
-    
-    while not validate_number(numero, minimo, maximo):
-        numero = int(input(mensaje_error))
+def es_entero(cadena):
+    es_entero = True
 
-    return numero 
+    if len(cadena) == 0:
+        es_entero = False
+
+    if cadena[0] == "-":
+        if len(cadena) == 1:
+            es_entero = False
+        cadena = cadena[1:]
+    
+    for i in range(len(cadena)):
+        if cadena[i] < "0" or cadena[i] > "9":
+            es_entero = False
+
+    return es_entero
+
+def get_int(mensaje: str, mensaje_error: str, minimo: int, maximo: int) -> int | None:
+    numero = input(mensaje)
+
+    while True:
+        if numero == "":
+            print("No ingresaste nada. Intenta de nuevo.")
+            numero = input(mensaje_error)
+            continue
+
+        if not es_entero(numero):
+            numero = input(mensaje_error)
+            continue
+
+        numero_int = int(numero)
+
+        if not validate_number(numero_int, minimo, maximo):
+            numero = input(mensaje_error)
+            continue
+
+        return numero_int
 
 
 def validar_usuario(vector_usuario, mensaje, mensaje_error):
